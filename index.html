@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stima il tuo Appartamento - Estimo 5A CAT</title>
+    <!-- Tailwind CSS per uno stile moderno e responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts per una tipografia ad alta leggibilità -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+        .touch-target {
+            min-height: 48px;
+            min-width: 48px;
+        }
+        /* Custom High Contrast Focus styles for keyboard accessibility */
+        button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-200">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <span class="bg-blue-600 text-white font-black text-xl px-3 py-1 rounded-lg shadow">5A CAT</span>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-tight">STIMA IL TUO APPARTAMENTO!</h1>
+                    <p class="text-xs text-blue-200">Estimo Immobiliare &bull; Prassi Valutative</p>
+                </div>
+            </div>
+            <!-- NAV BUTTONS -->
+            <nav class="flex items-center space-x-2 w-full sm:w-auto mt-2 sm:mt-0" aria-label="Navigazione Principale">
+                <button id="nav-scopri" onclick="switchTab('scopri')" 
+                    class="flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-700 text-white hover:bg-blue-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.168 18.477 18.575 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <span>1. SCOPRI (Concetti)</span>
+                </button>
+                <button id="nav-sfida" onclick="switchTab('sfida')" 
+                    class="flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-950 text-blue-200 hover:bg-blue-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>2. SFIDA (Caso Pratico)</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- SECTION 1: SCOPRI (SCHEDE DIDATTICHE) -->
+        <section id="section-scopri" class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center justify-between flex-wrap gap-4 mb-4">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-800">Schede di Studio: Concetti Chiave</h2>
+                        <p class="text-sm text-slate-600 mt-1">Consulta queste 5 schede per acquisire le conoscenze necessarie per affrontare la Sfida estimativa.</p>
+                    </div>
+                    <button onclick="switchTab('sfida')" class="touch-target bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow transition flex items-center gap-2">
+                        <span>Vai alla Sfida</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+
+                <!-- CARDS GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+
+                    <!-- CARD 1 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 1</span>
+                            <h3 class="font-bold text-lg text-slate-800">I 6 Criteri Estimativi</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-3">
+                            In Estimo il valore di un bene non è unico, ma dipende dallo scopo della valutazione (quesito estimativo):
+                        </p>
+                        <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-4">
+                            <li><strong class="text-slate-900">Valore di Mercato (Vm):</strong> Prezzo più probabile in una libera compravendita.</li>
+                            <li><strong class="text-slate-900">Valore di Costo (Vc):</strong> Spesa per produrre o ricostruire il bene.</li>
+                            <li><strong class="text-slate-900">Valore di Trasformazione (Vt):</strong> Valore del bene trasformato meno i costi di trasformazione (Vt = Vm - K).</li>
+                            <li><strong class="text-slate-900">Valore Complementare (Vcomp):</strong> Valore del tutto meno valore della parte residua.</li>
+                            <li><strong class="text-slate-900">Valore di Surrogazione (Vs):</strong> Valore di un bene sostitutivo.</li>
+                            <li><strong class="text-slate-900">Valore di Demolizione:</strong> Valore dei materiali recuperabili al netto dei costi.</li>
+                        </ul>
+                    </div>
+
+                    <!-- CARD 2 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 2</span>
+                            <h3 class="font-bold text-lg text-slate-800">Valore di Mercato e Comparazione</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+                            Il criterio del **Valore di Mercato** si applica per beni scambiati ordinariamente sul mercato.
+                        </p>
+                        <div class="bg-blue-50 border-l-4 border-blue-600 p-3 my-2 rounded-r-md">
+                            <p class="text-xs font-semibold text-blue-900">Metodo per Comparazione Diretta:</p>
+                            <p class="text-xs text-blue-800 mt-1">Si confronta l'immobile da stimare con immobili simili compravenduti di recente nello stesso segmento di mercato omogeneo.</p>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-2">
+                            <strong>Formula Base:</strong> Vm = Superficie Commerciale (mq) × Prezzo medio (€/mq) × Coeff. Merito.
+                        </p>
+                    </div>
+
+                    <!-- CARD 3 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 3</span>
+                            <h3 class="font-bold text-lg text-slate-800">Superficie Commerciale (mq)</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+                            La superficie commerciale somma le superfici coperte e quelle secondarie applicando opportuni **coefficienti di ponderazione**:
+                        </p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li><strong>Superficie Coperta Principale:</strong> 100% (compresi muri interni ed esterni fino a 25 cm).</li>
+                            <li><strong>Balconi e Terrazze:</strong> 30% (fino a 25 mq).</li>
+                            <li><strong>Cantine / Soffitte NON comunicanti:</strong> 25%.</li>
+                            <li><strong>Cantine / Soffitte COMUNICANTI:</strong> 50%.</li>
+                            <li><strong>Giardino / Corte esclusiva:</strong> 10% (fino alla quota pari alla superficie coperta).</li>
+                        </ul>
+                    </div>
+
+                    <!-- CARD 4 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 4</span>
+                            <h3 class="font-bold text-lg text-slate-800">Coefficienti di Merito</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+                            Aumentano o riducono il valore base unitario (€/mq) in funzione delle caratteristiche specifiche del bene:
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 mt-2">
+                            <div class="bg-white p-2 rounded border border-slate-200">
+                                <strong>Piano ed Ascensore:</strong><br>
+                                Piano Terra: -10% (0.90)<br>
+                                Piano Alto con Ascensore: +5% (1.05)<br>
+                                Piano Alto SENZA Ascensore: -15% (0.85)
+                            </div>
+                            <div class="bg-white p-2 rounded border border-slate-200">
+                                <strong>Stato Conservativo:</strong><br>
+                                Ristrutturato: +10% (1.10)<br>
+                                Buono stato: 0% (1.00)<br>
+                                Da ristrutturare: -20% (0.80)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 5 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm md:col-span-2">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 5</span>
+                            <h3 class="font-bold text-lg text-slate-800">Valore di Trasformazione (Vt)</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Si applica quando un bene è suscettibile di una trasformazione conveniente (es. ristrutturazione, frazionamento, cambio d'uso).
+                        </p>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3 mt-3 rounded-r-md text-xs text-amber-900">
+                            <strong>Formula di Stima:</strong> Vt = Vm(post trasformazione) - ΣK <br>
+                            dove ΣK rappresenta la somma di tutti i costi di trasformazione (opere edilizie, spese tecniche, oneri, interessi e profitto dell'imprenditore).
+                        </div>
+                    </div>
+
+                    <!-- CARD 5 -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-5 hover:border-blue-400 transition shadow-sm md:col-span-2">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md">SCHEDA 5</span>
+                            <h3 class="font-bold text-lg text-slate-800">Valore di Trasformazione ($V_t$)</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Si applica quando un bene è suscettibile di una trasformazione conveniente (es. ristrutturazione, frazionamento, cambio d'uso).
+                        </p>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3 mt-3 rounded-r-md text-xs text-amber-900">
+                            <strong>Formula di Stima:</strong> $V_t = V_{m(\text{post trasformazione})} - \Sigma K$ <br>
+                            dove $\Sigma K$ rappresenta la somma di tutti i costi di trasformazione (opere edilizie, spese tecniche, oneri, interessi e profitto dell'imprenditore).
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SFIDA (CASO PRATICO DI STIMA) -->
+        <section id="section-sfida" class="hidden space-y-6">
+            
+            <!-- CASO INTRO CARD -->
+            <div class="bg-blue-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-blue-500 text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider">Incarico Peritale #2026-CAT</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold mt-2">Stima dell'Appartamento del Sig. Rossi</h2>
+                    <p class="text-sm text-blue-100 mt-2 max-w-3xl leading-relaxed">
+                        Il perito geometra è chiamato a redigere la perizia di stima per la vendita dell'immobile sito al 4° piano in zona semicentrale. Analizza i dati tecnici ed esegui i calcoli peritali per determinare il probabile valore dell'immobile.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FORM PROVA PERITALE -->
+            <div id="sfida-form-container" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-8">
+                
+                <!-- REGOLAMENTO / TENTATIVI HEADER -->
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-lg">PROVA UNICA</span>
+                        <span class="text-xs font-semibold text-slate-500">5 Passaggi Interconnessi</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-500">Tentativi disponibili per risposta:</span>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded border border-blue-200">2 tentativi</span>
+                    </div>
+                </div>
+
+                <!-- STEP 1 -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4" id="step-1-card">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-blue-600 text-white font-extrabold text-sm w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 mt-0.5">1</span>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">Scelta del Criterio di Stima</h3>
+                            <p class="text-sm text-slate-600 mt-1">
+                                L'appartamento è attualmente abitabile e verrà immesso nel libero mercato immobiliare locale dove sono presenti numerose transazioni recenti di immobili simili. Quale criterio ordinario devi adottare?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pl-10 space-y-2">
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q1" value="A" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">A. Criterio del Valore di Costo di Ricostruzione (Vc)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q1" value="B" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">B. Criterio del Valore di Mercato (Vm) per comparazione diretta</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q1" value="C" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">C. Criterio del Valore di Trasformazione (Vt)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4" id="step-2-card">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-blue-600 text-white font-extrabold text-sm w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 mt-0.5">2</span>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">Calcolo della Superficie Commerciale (mq)</h3>
+                            <p class="text-sm text-slate-600 mt-1">
+                                Dai rilievi peritativi risultano i seguenti dati metrici dell'immobile Rossi:
+                            </p>
+                            <ul class="text-xs font-mono bg-white p-3 rounded border border-slate-200 my-2 space-y-1 text-slate-700">
+                                <li>- Superficie coperta calpestabile (compresi muri): 90,00 mq</li>
+                                <li>- Balcone principale: 20,00 mq (coeff. ponderazione 30%)</li>
+                                <li>- Cantina nei piani interrati (NON comunicante): 10,00 mq (coeff. ponderazione 25%)</li>
+                            </ul>
+                            <p class="text-sm text-slate-700 font-semibold">Qual è la Superficie Commerciale totale ragguagliata?</p>
+                        </div>
+                    </div>
+                    <div class="pl-10 space-y-2">
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q2" value="A" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">A. 120,00 mq</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q2" value="B" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">B. 98,50 mq</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q2" value="C" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">C. 101,00 mq</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4" id="step-3-card">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-blue-600 text-white font-extrabold text-sm w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 mt-0.5">3</span>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">Applicazione dei Coefficienti di Merito</h3>
+                            <p class="text-sm text-slate-600 mt-1">
+                                La quotazione OMI media per abitazioni civili nella microzona è pari a **2.000 €/mq**. L'appartamento presenta le seguenti caratteristiche extrastandard:
+                            </p>
+                            <ul class="text-xs font-mono bg-white p-3 rounded border border-slate-200 my-2 space-y-1 text-slate-700">
+                                <li>- Posizione di Piano: Piano 4° SENZA Ascensore (deffezione/penalizzazione del -15% &rarr; coeff. 0,85)</li>
+                                <li>- Stato di Conservazione: Completamente Ristrutturato a nuovo (incremento del +10% &rarr; coeff. 1,10)</li>
+                                <li>- Coefficiente globale di merito = 1,00 - 0,15 + 0,10 = <strong>0,95</strong></li>
+                            </ul>
+                            <p class="text-sm text-slate-700 font-semibold">Qual è la quotazione unitaria corretta (€/mq)?</p>
+                        </div>
+                    </div>
+                    <div class="pl-10 space-y-2">
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q3" value="A" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">A. 1.900 €/mq (2.000 €/mq × 0,95)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q3" value="B" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">B. 2.100 €/mq (2.000 €/mq × 1,05)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q3" value="C" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">C. 2.000 €/mq (Nessuna variazione)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4" id="step-4-card">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-blue-600 text-white font-extrabold text-sm w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 mt-0.5">4</span>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">Determinazione del Valore Finale di Stima</h3>
+                            <p class="text-sm text-slate-600 mt-1">
+                                Moltiplicando la Superficie Commerciale calcolata (98,50 mq) per il valore unitario corretto (1.900 €/mq), quale sarà il più probabile **Valore di Mercato** dell'appartamento Rossi?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pl-10 space-y-2">
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q4" value="A" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">A. 197.000 €</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q4" value="B" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">B. 187.150 €</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 cursor-pointer touch-target">
+                            <input type="radio" name="q4" value="C" class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-3 text-sm font-medium text-slate-800">C. 207.000 €</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 5 -->
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-4" id="step-5-card">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-blue-600 text-white font-extrabold text-sm w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 mt-0.5">5</span>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">Verifica Metodologica: Abbinamento Casi - Criteri</h3>
+                            <p class="text-sm text-slate-600 mt-1">
+                                Collega ciascuna situazione estimativa specifica al suo Criterio di Stima corretto selezionale dal menu a tendina:
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pl-10 space-y-4">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                            <span class="text-xs md:text-sm text-slate-800 font-medium">1. Stima di un sottotetto al grezzo da trasformare in mansarda residenziale per la vendita:</span>
+                            <select id="q5_1" class="touch-target text-sm border-2 border-slate-300 rounded-lg p-2 bg-slate-50 font-semibold text-slate-800 focus:border-blue-500">
+                                <option value="">-- Seleziona Criterio --</option>
+                                <option value="costo">Valore di Costo</option>
+                                <option value="trasformazione">Valore di Trasformazione</option>
+                                <option value="complementare">Valore Complementare</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                            <span class="text-xs md:text-sm text-slate-800 font-medium">2. Stima del danno subito da un solo appartamento in un condominio a seguito di infiltrazione:</span>
+                            <select id="q5_2" class="touch-target text-sm border-2 border-slate-300 rounded-lg p-2 bg-slate-50 font-semibold text-slate-800 focus:border-blue-500">
+                                <option value="">-- Seleziona Criterio --</option>
+                                <option value="costo">Costo di Ripristino / Valore Complementare</option>
+                                <option value="mercato">Valore di Mercato</option>
+                                <option value="surrogazione">Valore di Surrogazione</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBMIT ACTION -->
+                <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-xs text-slate-500">
+                        * In conformità con la scheda di progetto, il feedback, le correzioni e i rimandi verranno mostrati al termine della consegna.
+                    </p>
+                    <button onclick="submitPerizia()" class="w-full sm:w-auto touch-target bg-blue-700 hover:bg-blue-800 text-white text-base font-extrabold px-8 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>CONSEGNA PERIZIA</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- RESULT REPORT CONTAINER (INIZIALMENTE NASCOSTO) -->
+            <div id="sfida-result-container" class="hidden bg-white p-6 rounded-2xl shadow-md border border-slate-200 space-y-6">
+                <div id="result-header" class="p-5 rounded-xl text-center space-y-2">
+                    <!-- Popolato dinamicamente via JS -->
+                </div>
+
+                <div class="border-t border-slate-200 pt-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Riepilogo Dettagliato ed Analisi degli Errori</h3>
+                    <div id="result-details" class="space-y-4">
+                        <!-- Popolato dinamicamente via JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-200">
+                    <button onclick="switchTab('scopri')" class="touch-target w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-5 py-2.5 rounded-xl border border-slate-300 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0"></path></svg>
+                        <span>Torna a Ripassare (Scopri)</span>
+                    </button>
+                    <button id="retry-btn" onclick="retrySfida()" class="touch-target w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl shadow flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        <span>Riprova la Sfida (Secondo Tentativo)</span>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-800 text-slate-400 text-xs py-4 px-4 text-center border-t border-slate-700 mt-8">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p>App Didattica per la Classe 5A CAT &bull; Disciplina: Estimo Immobiliare</p>
+            <p>Conforme alle Linee Guida Ministeriali e Prassi OMI / CVI</p>
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        // Stato dell'applicazione
+        let currentAttempts = 0;
+        const maxAttempts = 2;
+
+        // Risposte Corrette e Riferimenti alle Schede Didattiche
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'B',
+            q3: 'A',
+            q4: 'B',
+            q5_1: 'trasformazione',
+            q5_2: 'costo'
+        };
+
+        const feedbackData = {
+            q1: {
+                title: "1. Criterio di Stima dell'Appartamento Rossi",
+                scheda: "SCHEDA 2: Valore di Mercato e Comparazione",
+                spiegazione: "Trattandosi di un immobile ordinario da immettere nel libero mercato con la presenza di comparabili simili, il criterio corretto è il Valore di Mercato (Vm) per comparazione diretta.",
+                suggerimento: "Ricorda: il Valore di Costo si usa per nuove costruzioni/ricostruzioni, mentre il Valore di Trasformazione si applica a immobili che devono subire modifiche sostanziali prima della vendita."
+            },
+            q2: {
+                title: "2. Calcolo della Superficie Commerciale",
+                scheda: "SCHEDA 3: Superficie Commerciale (mq)",
+                spiegazione: "Superficie = 90 mq (coperti) + (20 × 0,30) (balcone) + (10 × 0,25) (cantina) = 90 + 6 + 2,5 = 98,50 mq.",
+                suggerimento: "Verifica di aver applicato i giusti coefficienti: 30% per i balconi e 25% per la cantina non comunicante."
+            },
+            q3: {
+                title: "3. Coefficienti di Merito",
+                scheda: "SCHEDA 4: Coefficienti di Merito",
+                spiegazione: "Valore unitario = 2.000 €/mq × (1,00 - 0,15 + 0,10) = 2.000 × 0,95 = 1.900 €/mq.",
+                suggerimento: "Il 4° piano senza ascensore penalizza del 15% (-0,15), mentre la ristrutturazione aumenta del 10% (+0,10)."
+            },
+            q4: {
+                title: "4. Valore di Mercato Complessivo",
+                scheda: "SCHEDA 2 e SCHEDA 3",
+                spiegazione: "Valore Complessivo Vm = 98,50 mq × 1.900 €/mq = 187.150 €.",
+                suggerimento: "Moltiplica la superficie commerciale ottenuta nello step 2 per il valore a metro quadro corretto dello step 3."
+            },
+            q5_1: {
+                title: "5.1 Abbinamento Mansarda da Ultimare",
+                scheda: "SCHEDA 5: Valore di Trasformazione (Vt)",
+                spiegazione: "Quando un immobile richiede un intervento edilizio per poter esprimere il suo potenziale valore di mercato, si stima con il Valore di Trasformazione (Vt = Vm(post) - K).",
+                suggerimento: "Il sottotetto al grezzo deve essere prima trasformato per essere venduto come abitazione."
+            },
+            q5_2: {
+                title: "5.2 Abbinamento Danno da Infiltrazione",
+                scheda: "SCHEDA 1: I 6 Criteri Estimativi",
+                spiegazione: "Per valutare un danno circoscritto si stima il Costo necessario al ripristino o la perdita di valore tramite la differenza tra valore ante e post danno (Valore Complementare).",
+                suggerimento: "Un danno specifico si valuta in base alle spese per riportare il bene allo stato ordinario originale."
+            }
+        };
+
+        // Gestione Tab Switching
+        function switchTab(tab) {
+            const scopriSection = document.getElementById('section-scopri');
+            const sfidaSection = document.getElementById('section-sfida');
+            const navScopri = document.getElementById('nav-scopri');
+            const navSfida = document.getElementById('nav-sfida');
+
+            if (tab === 'scopri') {
+                scopriSection.classList.remove('hidden');
+                sfidaSection.classList.add('hidden');
+                
+                navScopri.className = "flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-700 text-white hover:bg-blue-600";
+                navSfida.className = "flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-950 text-blue-200 hover:bg-blue-800";
+            } else {
+                scopriSection.classList.add('hidden');
+                sfidaSection.classList.remove('hidden');
+
+                navSfida.className = "flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-700 text-white hover:bg-blue-600";
+                navScopri.className = "flex-1 sm:flex-none touch-target px-4 py-2 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 bg-blue-950 text-blue-200 hover:bg-blue-800";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Funzione per mostrare un messaggio temporaneo in pagina (sostituisce alert)
+        function showNotification(message) {
+            let notif = document.getElementById('custom-notification');
+            if(!notif) {
+                notif = document.createElement('div');
+                notif.id = 'custom-notification';
+                notif.className = 'fixed bottom-4 right-4 bg-amber-600 text-white px-5 py-3 rounded-xl shadow-xl z-50 text-sm font-bold flex items-center gap-2 transition-all transform';
+                document.body.appendChild(notif);
+            }
+            notif.innerHTML = `<span>⚠️ ${message}</span>`;
+            notif.style.display = 'flex';
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 3500);
+        }
+
+        // Invio e Verifica Perizia
+        function submitPerizia() {
+            // Estrazione risposte
+            const q1Val = document.querySelector('input[name="q1"]:checked')?.value;
+            const q2Val = document.querySelector('input[name="q2"]:checked')?.value;
+            const q3Val = document.querySelector('input[name="q3"]:checked')?.value;
+            const q4Val = document.querySelector('input[name="q4"]:checked')?.value;
+            const q5_1Val = document.getElementById('q5_1').value;
+            const q5_2Val = document.getElementById('q5_2').value;
+
+            // Validazione: tutte le risposte devono essere selezionate
+            if (!q1Val || !q2Val || !q3Val || !q4Val || !q5_1Val || !q5_2Val) {
+                showNotification("Completa tutte le 5 domande della perizia prima di consegnare.");
+                return;
+            }
+
+            currentAttempts++;
+
+            const userAnswers = {
+                q1: q1Val,
+                q2: q2Val,
+                q3: q3Val,
+                q4: q4Val,
+                q5_1: q5_1Val,
+                q5_2: q5_2Val
+            };
+
+            // Calcolo punteggio
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let key in correctAnswers) {
+                if (userAnswers[key] === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            // Nasconde Form e mostra Risultati
+            document.getElementById('sfida-form-container').classList.add('hidden');
+            const resultContainer = document.getElementById('sfida-result-container');
+            resultContainer.classList.remove('hidden');
+
+            // Header Risultati con Simboli ✓ / ✗
+            const resultHeader = document.getElementById('result-header');
+            const passed = score === totalQuestions;
+
+            if (passed) {
+                resultHeader.className = "p-5 rounded-xl text-center space-y-2 bg-emerald-100 border-2 border-emerald-500 text-emerald-900";
+                resultHeader.innerHTML = `
+                    <div class="text-4xl">✓</div>
+                    <h3 class="text-2xl font-extrabold">PERIZIA APPROVATA! (Punteggio: ${score}/${totalQuestions})</h3>
+                    <p class="text-sm font-medium">Eccellente lavoro geometra! Hai applicato correttamente tutti i criteri estimativi e la procedura di calcolo.</p>
+                `;
+            } else {
+                resultHeader.className = "p-5 rounded-xl text-center space-y-2 bg-amber-100 border-2 border-amber-500 text-amber-900";
+                resultHeader.innerHTML = `
+                    <div class="text-4xl">✗</div>
+                    <h3 class="text-2xl font-extrabold">PERIZIA REVISIONATA (Punteggio: ${score}/${totalQuestions})</h3>
+                    <p class="text-sm font-medium">Alcuni passaggi del calcolo o delle scelte estimative contengono imprecisioni. Consulta il riepilogo sotto.</p>
+                `;
+            }
+
+            // Generazione Dettagli Feedback
+            const resultDetails = document.getElementById('result-details');
+            resultDetails.innerHTML = '';
+
+            for (let key in correctAnswers) {
+                const isCorrect = userAnswers[key] === correctAnswers[key];
+                const itemData = feedbackData[key];
+
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-xl border-2 ${isCorrect ? 'bg-emerald-50 border-emerald-300' : 'bg-red-50 border-red-300'}`;
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <h4 class="font-bold text-slate-800 text-sm">${itemData.title}</h4>
+                        <span class="text-base font-black px-2 py-0.5 rounded ${isCorrect ? 'bg-emerald-200 text-emerald-800' : 'bg-red-200 text-red-800'}">
+                            ${isCorrect ? '✓ CORRETTO' : '✗ ERRATO'}
+                        </span>
+                    </div>
+                    ${!isCorrect ? `
+                        <div class="mt-2 text-xs space-y-2 text-slate-700">
+                            <p class="font-semibold text-red-800">Spiegazione Errore: ${itemData.spiegazione}</p>
+                            <p class="bg-white p-2.5 rounded border border-red-200 text-slate-800">💡 <strong>Suggerimento:</strong> ${itemData.suggerimento}</p>
+                            <p class="text-blue-800 font-bold">📖 Torna a studiare: <button onclick="switchTab('scopri')" class="underline hover:text-blue-900">${itemData.scheda}</button></p>
+                        </div>
+                    ` : `
+                        <p class="mt-1 text-xs text-emerald-800 font-medium">Spiegazione: ${itemData.spiegazione}</p>
+                    `}
+                `;
+
+                resultDetails.appendChild(card);
+            }
+
+            // Gestione Bottone Riprova (max 2 tentativi)
+            const retryBtn = document.getElementById('retry-btn');
+            if (currentAttempts >= maxAttempts || passed) {
+                retryBtn.classList.add('hidden');
+            } else {
+                retryBtn.classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Reset per Secondo Tentativo
+        function retrySfida() {
+            document.getElementById('sfida-result-container').classList.add('hidden');
+            document.getElementById('sfida-form-container').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
